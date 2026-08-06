@@ -1,0 +1,23 @@
+{
+  "name": "practica-tasks-mengual-azul",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --watch app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/azulmengualtsdm-dotcom/practica-tasks-mengual-azul.git"
+  },
+  "homepage": "https://github.com/azulmengualtsdm-dotcom/practica-tasks-mengual-azul.git",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0",
+    "sequelize": "^6.37.3"
+  }
+}
+
