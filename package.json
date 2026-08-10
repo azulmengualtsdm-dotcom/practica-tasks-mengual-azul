@@ -9,15 +9,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/azulmengualtsdm-dotcom/practica-tasks-mengual-azul.git"
   },
   "homepage": "https://github.com/azulmengualtsdm-dotcom/practica-tasks-mengual-azul.git",
   "dependencies": {
-    "express": "^4.19.2",
-    "mysql2": "^3.11.0",
-    "sequelize": "^6.37.3"
+    "express": "^4.22.2",
+    "mysql2": "^3.23.3",
+    "sequelize": "^6.37.8"
   }
 }
-

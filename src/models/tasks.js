@@ -1,5 +1,5 @@
-const { DataTypes } = require( 'sequelize');
-const sequelize= require('../config/database.js')
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../config/database.js';
 
 const tasks= sequelize.define('tasks',
     {
@@ -25,5 +25,7 @@ const tasks= sequelize.define('tasks',
         defaultValue:false,
         allowNull:false
     }}, {
-  timestamps: true // Crea createdAt y updatedAt de forma automática
+  timestamps: true 
 })
+
+export default tasks

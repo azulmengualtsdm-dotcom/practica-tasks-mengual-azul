@@ -1,29 +1,44 @@
-const user=require ('../models/users')
+import { Usermodel } from '../models/users.js'
 
-const createUsers= async (req,res)=>{
+export const createUsers= async (req,res)=>{
     try {
         const {name, email, password}=req.body
-        const newUser= await user.create({name, email, password})
+
+      if (!name){
+        return res.status(400).json({message:"el user no debe estar vacio"})
+      }
+
+        const newUser= await Usermodel.create({name, email, password})
         res.status(201).json(newUser)
     } catch (error) {
         res.status(400).json ({error:'no se pudo crear el usuario'})
     }
 }
 
-const getAllusers=async(req,res)=>{
+export const getAllusers=async(req,res)=>{
     try {
-        const users= await user.findAll
+        const users= await Usermodel.findAll
         res.status(200).json(users)
     } catch(error){
-        res.status(500).json({error:'no se pudo cargar todos los usuarios'})
+        console.log(error)
+        return res.status(500).json({message:'no se pudo cargar todos los usuarios'})
     }
 }
 
-const updateUser= async (req,res) =>{
+export const getUserById=async (req, res)=>{
+    try{
+        res.status(201).json({message:"obtener un user por id"})
+
+    }catch(error){
+
+    }
+}
+
+export const updateUser= async (req,res) =>{
     try{
         const { id }=req.params
         const {name, email, password}=req.body
-        const User = await User.findByPk(id);
+        const User = await Usermodel.findByPk(id);
     if (!user) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
@@ -34,24 +49,17 @@ const updateUser= async (req,res) =>{
   }
 }
 
-const deleteUser= async (req,res)=>{
+export const deleteUser= async (req,res)=>{
     try{
         const {id}=req.params
-        const user= await user.findByPk(id)
+        const user= await Usermodel.findByPk(id)
         if (!user) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
-    await user.destroy();
+    await Usermodel.destroy();
     res.status(200).json({ mensaje: 'Usuario eliminado correctamente' });
     } catch (error) {
     res.status(500).json({ error: 'Error al eliminar el usuario' });
   }
     }
-
-    module.exports = {
-  createUsers,
-  getAllusers,
-  updateUser,
-  deleteUser
-};
