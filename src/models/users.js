@@ -18,4 +18,4 @@ export const Usermodel =sequelize.define('User', {
 }, {
     timestamps:true
 })
-export default users
+export default Usermodel

@@ -27,6 +27,9 @@ export const getAllusers=async(req,res)=>{
 
 export const getUserById=async (req, res)=>{
     try{
+
+      const {id}=req.params
+      const usuario= await Usermodel.findByPk
         res.status(201).json({message:"obtener un user por id"})
 
     }catch(error){
