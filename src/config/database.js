@@ -8,6 +8,7 @@ export const sequelize= new Sequelize('tasks_users_db','root', '', {
 
 export const startDb= async ()=>{
     try{
+        await sequelize.authenticate()
         await sequelize.sync();
         console.log("conexion exitosa con la base de datos")
     } catch(error) {
