@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/azulmengualtsdm-dotcom/practica-tasks-mengual-azul.git",
   "dependencies": {
+    "dotenv": "^17.4.2",
     "express": "^4.22.2",
     "mysql2": "^3.23.3",
     "sequelize": "^6.37.8"
