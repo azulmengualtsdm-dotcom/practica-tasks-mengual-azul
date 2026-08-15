@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
+import tasks from "./tasks.js";
 
 export const Usermodel =sequelize.define('User', {
     name:{
@@ -14,8 +15,9 @@ export const Usermodel =sequelize.define('User', {
     password:{
         type:DataTypes.STRING(100),
         allowNull:false
-    }
-}, {
-    timestamps:true
+    },
+    }, {
+    timestamps:false
 })
 export default Usermodel
+
