@@ -31,6 +31,8 @@ const tasks= sequelize.define('tasks',
         references:{
             Model:"Users",
             key:"id"
+        }, validate:{
+            notNull:{msg:"la tarea debe pertenecer a un usuario"}
         }
     }}, {
   timestamps: false

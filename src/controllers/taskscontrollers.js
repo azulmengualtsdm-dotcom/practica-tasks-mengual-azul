@@ -3,8 +3,12 @@ import tasks from "../models/tasks.js";
 
 export const createTasks= async (req, res)=>{
     try{
-        const { tittle, description, isComplete }=req.body
-        const newTasks= await tasks.create ({tittle, description, isComplete})
+        const { tittle, description, isComplete, User_id }=req.body
+        if(!user_id) {
+          return res.status(400).json({error:'no se puede crear una tarea sin un usuario'})
+        }
+
+        const newTasks= await tasks.create ({tittle, description, isComplete, User_id })
         res.status(201).json(newTasks)
     } catch(error){
         res.status(400).json({error:'no se pudo crear una nueva tarea'})

@@ -1,3 +1,4 @@
+import { sequelize } from '../config/database.js'
 import { Usermodel } from '../models/users.js'
 
 export const createUsers= async (req,res)=>{
@@ -17,7 +18,9 @@ export const createUsers= async (req,res)=>{
 
 export const getAllusers=async(req,res)=>{
     try {
-        const users= await Usermodel.findAll
+        const users= await Usermodel.findAll({
+          include:{modal:sequelize.models.tasks, as:"tasks"} 
+        })
         res.status(200).json(users)
     } catch(error){
         console.log(error)
@@ -29,7 +32,8 @@ export const getUserById=async (req, res)=>{
     try{
 
       const {id}=req.params
-      const usuario= await Usermodel.findByPk
+      const usuario= await Usermodel.findByPk(id, {include:{model:sequelize.models.tasks, as:"tasks"
+      }})
         res.status(201).json({message:"obtener un user por id"})
 
     }catch(error){
