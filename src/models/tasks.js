@@ -25,11 +25,11 @@ const tasks= sequelize.define('tasks',
         type:DataTypes.BOOLEAN,
         defaultValue:false,
         allowNull:false
-    }, User_id:{
+    }, user_id:{
         type:DataTypes.INTEGER,
         allowNull:false,
         references:{
-            Model:"Users",
+            model:"Users",
             key:"id"
         }, validate:{
             notNull:{msg:"la tarea debe pertenecer a un usuario"}
@@ -40,5 +40,5 @@ const tasks= sequelize.define('tasks',
 
 export default tasks
 
-tasks.belongsTo(Usermodel, {foreignKey:"User_id", as:"author"})
-Usermodel.hasMany(tasks,{foreignKey:"User_id", as:"tasks"})
+tasks.belongsTo(Usermodel, {foreignKey:"user_id", as:"author"})
+Usermodel.hasMany(tasks,{foreignKey:"user_id", as:"tasks"})

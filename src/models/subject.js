@@ -1,17 +1,17 @@
 import { DataTypes } from "sequelize";
 import Sequelize from "sequelize";
+import { sequelize } from "../config/database.js";
 
-import Usermodel from "./users";
-import { sequelize } from "../config/database";
+import Usermodel from "./users.js";
 
 const subject=sequelize.define('Subjectmodel', {
     name:{
         type:DataTypes.STRING(100),
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
 }, {
     timestamps:false
 })
 
-subject.hasMany(Usermodel, {foreignKey:"userRegis_id", as:"registered"})
-Usermodel.hasMany(subject, {foreignKey:"userRegis_id", as:""})
+export default subject

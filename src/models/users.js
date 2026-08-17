@@ -1,10 +1,10 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
-import tasks from "./tasks.js";
+
 
 import person from "./person.js";
 
-export const Usermodel =sequelize.define('User', {
+const Usermodel = sequelize.define('User', {
     name:{
         type:DataTypes.STRING(100),
         allowNull:false
@@ -18,11 +18,11 @@ export const Usermodel =sequelize.define('User', {
         type:DataTypes.STRING(100),
         allowNull:false
     },
-    }, {
+      }, {
     timestamps:false
 })
 export default Usermodel
 
-Usermodel.belongsTo(Personmodel, {foreignKey:"person_id", as:"creator"})
-Personmodel.belongsTo(Usermodel, {foreignKey:"person_id", as:"user"})
+Usermodel.belongsTo(person, {foreignKey:"person_id", as:"creator"})
+person.belongsTo(Usermodel, {foreignKey:"person_id", as:"user"})
 
