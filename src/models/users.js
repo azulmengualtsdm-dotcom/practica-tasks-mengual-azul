@@ -18,11 +18,20 @@ const Usermodel = sequelize.define('User', {
         type:DataTypes.STRING(100),
         allowNull:false
     },
+        person_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+      references: {
+        model: "People",
+        key: "id",
+      },
+    },
       }, {
     timestamps:false
 })
 export default Usermodel
 
 Usermodel.belongsTo(person, {foreignKey:"person_id", as:"creator"})
-person.belongsTo(Usermodel, {foreignKey:"person_id", as:"user"})
+person.hasOne(Usermodel, {foreignKey:"person_id", as:"user"})
 

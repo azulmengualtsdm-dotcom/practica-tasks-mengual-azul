@@ -1,4 +1,5 @@
 import { DataTypes } from "sequelize";
+import { sequelize } from "../config/database.js";
 
 import Sequelize from "sequelize";
 
@@ -6,7 +7,7 @@ import Usermodel from "./users.js";
 
 import subject from "./subject.js";
 
-export const UserSubjectModel = sequelize.define(
+const UserSubjectModel = sequelize.define(
   "User_subject",
   {
     id: {
@@ -24,3 +25,5 @@ export const UserSubjectModel = sequelize.define(
 
 subject.belongsToMany(Usermodel, {through:UserSubjectModel ,foreignKey:"subject_id", as:"users"})
 Usermodel.belongsToMany(subject, {through:UserSubjectModel ,foreignKey:"User_id", as:"subjects"})
+
+export default UserSubjectModel
