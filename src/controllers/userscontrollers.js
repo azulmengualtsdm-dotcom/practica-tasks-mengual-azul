@@ -2,6 +2,7 @@ import { sequelize } from '../config/database.js'
 import Usermodel from '../models/users.js'
 import tasks from '../models/tasks.js'
 import person from '../models/person.js'
+import { matchedData } from 'express-validator';
 
 export const createUsers = async (req, res) => {
   try {
@@ -62,23 +63,30 @@ export const getUserById=async (req, res)=>{
 }
 
 export const updateUser= async (req,res) =>{
-    try{
-        const { id }=req.params
-        const {name, email }=req.body
-        const User = await Usermodel.findByPk(id);
-    if (!User) {
-      return res.status(404).json({ error: 'Usuario no encontrado' });
-    }
-    await User.update({ name, email  });
-    res.status(200).json(User);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al actualizar el usuario', detalles: error.message });
+
+  try{
+    const  validatedataBody=matchedData(req, {locations:["body"]})
+  }catch(error){
+
   }
+  //   try{
+  //       const { id }=req.params
+  //       const {name, email }=req.body
+  //       const User = await Usermodel.findByPk(id);
+  //   if (!User) {
+  //     return res.status(404).json({ error: 'Usuario no encontrado' });
+  //   }
+  //   await User.update({ name, email  });
+  //   res.status(200).json(User);
+  // } catch (error) {
+  //   res.status(400).json({ error: 'Error al actualizar el usuario', detalles: error.message });
+  // }
 }
 
 export const deleteUser= async (req,res)=>{
     try{
         const {id}=req.params
+        console.log(id)
         const user= await Usermodel.findByPk(id)
         if (!user) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
