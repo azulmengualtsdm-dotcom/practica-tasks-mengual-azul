@@ -27,3 +27,14 @@ export const validateUpdatesubject= [
       return true;
     })
 ];
+export const validateidSubject = [
+  param('id')
+    .isInt({ min: 1 }).withMessage('El ID de la materia debe ser un número entero positivo')
+    .custom(async (id) => {
+      const subjectExists = await subject.findByPk(id);
+      if (!subjectExists) {
+        throw new Error(`La materia con el ID ${id} no existe en la base de datos`);
+      }
+      return true;
+    })
+];

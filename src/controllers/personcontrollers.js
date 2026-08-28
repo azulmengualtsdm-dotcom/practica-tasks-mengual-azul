@@ -36,7 +36,7 @@ export const updatePerson = async (req, res) => {
     const limData = matchedData(req);
 
     const personaVal = await person.findByPk(id);
-    if (!person) {
+    if (!personaVal) {
       return res.status(404).json({ error: 'persona no encontrada' });
     }
 
@@ -62,3 +62,15 @@ export const deletePerson = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el registro de persona' });
   }
 };
+export const getPersonByid=async(req, res)=>{
+  try{
+    const {id}=req.params
+    if(!persona){
+      return res.status(404).json({ error:"persona no econtrada"
+      })
+    }
+    res.status(200).json(persona)
+  }catch(error){
+    res.status(500).json({error:"error al obtener el registro de persona"})
+  }
+}

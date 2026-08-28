@@ -4,7 +4,7 @@ import { createUsers, deleteUser, getAllusers, getUserById, updateUser } from ".
 import { Router } from "express";
 import Usermodel from "../models/users.js";
 import validate from "../middleware/validator.js";
-import { validateidUser, validateBody } from "../middleware/validate.user.js";
+import { validateidUser, validateBody, updateUserValidation } from "../middleware/validate.user.js";
 
 const userRouter= Router();
 
@@ -13,11 +13,11 @@ userRouter.post("/", validateBody ,
 validate,
 createUsers)
 
-userRouter.get("/", validateBody, validateBody,validate, getAllusers)
+userRouter.get("/:id", validateBody, validateBody,validate,  getUserById)
 
-userRouter.get("/:id", validateidUser, validateBody, validate, getUserById)
+userRouter.get("/",getAllusers )
 
-userRouter.put("/:id",validateidUser, validate, updateUser)
+userRouter.put("/:id",updateUserValidation, validate, updateUser)
 
 userRouter.delete("/:id",validateidUser, validate, deleteUser)
 

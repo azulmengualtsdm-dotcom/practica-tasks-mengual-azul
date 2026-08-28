@@ -27,3 +27,14 @@ export const validateUpdatePerson= [
     .optional()
     .isInt({ min: 1 }).withMessage("El userId debe ser un número entero positivo válido")
 ];
+export const validateidPerson = [
+  param('id')
+    .isInt({ min: 1 }).withMessage("el ID de la persona debe ser un número entero positivo")
+    .custom(async (id) => {
+      const personExists = await person.findByPk(id);
+      if (!personExists) {
+        throw new Error("La persona con el ID ${id} no existe en la base de datos");
+      }
+      return true;
+    })
+];

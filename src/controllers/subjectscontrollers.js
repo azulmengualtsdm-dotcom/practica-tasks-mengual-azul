@@ -65,3 +65,17 @@ export const deleteSubject = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la materia', detalles: error.message });
   }
 };
+
+export const getSubjectById=async(req, res)=>{
+  try{
+    const {id}=req.params
+    if (!materia){
+      return res.status(404).json({error:"materia no encontrada"}
+
+      )
+    }
+    res.status(200).json(materia)
+  }catch(error){
+    res.status(500).json({error:"error al obtener la materia", detalles:error.message})
+  }
+}
