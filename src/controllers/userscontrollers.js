@@ -49,34 +49,40 @@ export const getAllusers=async(req,res)=>{
     }
 }
 
-export const getUserById=async (req, res)=>{
-    try{
+export const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const usuario = await Usermodel.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
+      include: { model: tasks, as: "tasks" }
+    });
 
-      const {id}=req.params
-      const usuario= await Usermodel.findByPk(id, {include:{model:tasks, as:"tasks"
-      }})
-        res.status(201).json(usuario)
-
-    }catch(error){
-
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
     }
-}
 
-export const updateUser= async (req,res) =>{
+    res.status(200).json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: 'Error inesperado en el servidor al obtener el usuario', detalles: error.message });
+  }
+};
 
-  try{
-    const  limData=matchedData(req, {locations:["body"]})
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const limData = matchedData(req);
+
     const User = await Usermodel.findByPk(id);
     if (!User) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
     await User.update(limData);
-    res.status(200).json({ mensaje: 'Usuario actualizado con éxito'});
+    res.status(200).json({ mensaje: 'Usuario actualizado con éxito', usuario: User });
   } catch (error) {
     res.status(400).json({ error: 'Error al actualizar el usuario', detalles: error.message });
   }
-
+};
   //   try{
   //       const { id }=req.params
   //       const {name, email }=req.body
@@ -89,7 +95,7 @@ export const updateUser= async (req,res) =>{
   // } catch (error) {
   //   res.status(400).json({ error: 'Error al actualizar el usuario', detalles: error.message });
   // }
-}
+
 
 export const deleteUser= async (req,res)=>{
     try{
