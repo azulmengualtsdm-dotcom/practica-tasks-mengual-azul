@@ -29,3 +29,36 @@ export const getAllPerson= async(req, res)=>{
         res.status(400).json({error:"no se pudo encontrar a la persona"})
     }
 }
+
+export const updatePerson = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const limData = matchedData(req);
+
+    const personaVal = await person.findByPk(id);
+    if (!person) {
+      return res.status(404).json({ error: 'persona no encontrada' });
+    }
+
+    await personaVal.update(limData);
+    res.status(200).json({ mensaje: 'persona actualizada correctamente' });
+  } catch (error) {
+    res.status(400).json({ error: 'Error al actualizar', detalles: error.message });
+  }
+};
+
+export const deletePerson = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const persona = await person.findByPk(id);
+    
+    if (!persona) {
+      return res.status(404).json({ error: 'Registro de persona no encontrado' });
+    }
+
+    await persona.destroy();
+    res.status(200).json({ mensaje: 'Persona eliminada de forma correcta' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar el registro de persona' });
+  }
+};

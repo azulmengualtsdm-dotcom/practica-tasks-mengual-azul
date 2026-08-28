@@ -28,7 +28,8 @@ const Usermodel = sequelize.define('User', {
       },
     },
       }, {
-    timestamps:false
+    timestamps:true,
+    paranoid:true
 })
 export default Usermodel
 

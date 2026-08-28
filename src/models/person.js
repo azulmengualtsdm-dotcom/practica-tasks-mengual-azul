@@ -11,7 +11,8 @@ const person= sequelize.define("Person", {
         allowNull:false
     }
 }, {
-    timestamps:false
+    timestamps:true,
+    paranoid:true
 })
 
 export default person

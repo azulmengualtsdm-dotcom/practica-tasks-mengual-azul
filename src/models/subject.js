@@ -11,7 +11,8 @@ const subject=sequelize.define('subject', {
         unique:true
     },
 }, {
-    timestamps:false
+    timestamps:true,
+    paranoid:true
 })
 
 export default subject

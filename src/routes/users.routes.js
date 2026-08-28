@@ -3,6 +3,7 @@ import { createUsers, deleteUser, getAllusers, getUserById, updateUser } from ".
 
 import { Router } from "express";
 import Usermodel from "../models/users.js";
+import validate from "../middleware/validator.js";
 import { validateidUser, validateBody } from "../middleware/validate.user.js";
 
 const userRouter= Router();

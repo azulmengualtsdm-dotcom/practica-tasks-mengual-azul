@@ -19,7 +19,8 @@ const UserSubjectModel = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
+    paranoid:true
   },
 );
 

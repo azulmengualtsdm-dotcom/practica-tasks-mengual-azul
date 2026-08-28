@@ -33,3 +33,35 @@ export const getAllSubject=async (req, res)=>{
     
     
 }
+
+export const updateSubject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const limData = matchedData(req);
+
+    const materia = await subject.findByPk(id);
+    if (!materia) {
+      return res.status(404).json({ error: 'Materia no encontrada' });
+    }
+
+    await materia.update(limData);
+    res.status(200).json({ mensaje: 'Materia actualizada correctamente' });
+  } catch (error) {
+    res.status(400).json({ error: 'Error al actualizar', detalles: error.message });
+  }}
+
+export const deleteSubject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const materia = await subject.findByPk(id);
+    
+    if (!materia) {
+      return res.status(404).json({ error: 'Materia no encontrada o ya eliminada' });
+    }
+
+    await materia.destroy();
+    res.status(200).json({ mensaje: 'Materia eliminada de forma correcta' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar la materia', detalles: error.message });
+  }
+};

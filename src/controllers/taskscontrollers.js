@@ -1,4 +1,5 @@
 
+import { matchedData } from "express-validator";
 import tasks from "../models/tasks.js";
 import Usermodel from "../models/users.js";
 
@@ -40,14 +41,14 @@ export const getTaskById = async (req, res) => {
 export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, isComplete } = req.body;
+    const limData=matchedData(req)
     
     const taskAEditar = await tasks.findByPk(id);
     if (!taskAEditar) {
       return res.status(404).json({ error: 'Tarea no encontrada' });
     }
 
-    await taskAEditar.update({ title, description, isComplete });
+    await taskAEditar.update(limData);
     res.status(200).json(taskAEditar);
   } catch (error) {
     res.status(400).json({ error: 'Error al actualizar la tarea', detalles: error.message });

@@ -12,3 +12,18 @@ export const validateBodySubjects=[
         return true
     })
 ]
+export const validateUpdatesubject= [
+  param("id")
+    .isInt({ min: 1 }).withMessage("El id debe ser un número entero positivo"),
+    
+  body("name")
+    .optional()
+    .notEmpty().withMessage("El nombre de la materia no debe estar vacío si se proporciona")
+    .custom(async (name, { req }) => {
+      const subjectExists = await subject.findOne({ where: { name } });
+      if (subjectExists && subjectExists.id !== parseInt(req.params.id)) {
+        throw new Error('Ya existe otra materia registrada con ese nombre');
+      }
+      return true;
+    })
+];

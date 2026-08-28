@@ -35,7 +35,8 @@ const tasks= sequelize.define('tasks',
             notNull:{msg:"la tarea debe pertenecer a un usuario"}
         }
     }}, {
-  timestamps: false
+  timestamps: true,
+  paranoid:true
 },)
 
 export default tasks

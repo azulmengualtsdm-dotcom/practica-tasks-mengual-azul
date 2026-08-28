@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import validate from "./validator";
+import validate from "./validator.js";
 
 export const validateUserSubject=[
   body('User_id')

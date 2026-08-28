@@ -65,10 +65,18 @@ export const getUserById=async (req, res)=>{
 export const updateUser= async (req,res) =>{
 
   try{
-    const  validatedataBody=matchedData(req, {locations:["body"]})
-  }catch(error){
+    const  limData=matchedData(req, {locations:["body"]})
+    const User = await Usermodel.findByPk(id);
+    if (!User) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
 
+    await User.update(limData);
+    res.status(200).json({ mensaje: 'Usuario actualizado con éxito'});
+  } catch (error) {
+    res.status(400).json({ error: 'Error al actualizar el usuario', detalles: error.message });
   }
+
   //   try{
   //       const { id }=req.params
   //       const {name, email }=req.body
