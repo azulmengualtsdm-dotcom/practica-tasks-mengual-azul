@@ -30,7 +30,7 @@ export const createUserSubject = async (req, res) => {
 export const getAlluserSubject = async (req, res) => {
   try {
     const data = await Usermodel.findAll({
-      attributes: ['id', 'name', 'email'], 
+      attributes: ['id', 'nameUser', 'email'], 
       include: {
         model: subject,
         as: 'subjects',

@@ -6,7 +6,7 @@ import { matchedData } from 'express-validator';
 
 export const createUsers = async (req, res) => {
   try {
-    const { name, email, password, lastname } = req.body;
+    const {nameUser, name, email, password, lastname } = req.body;
 
     if (!name || name.trim() === "" || !email || !password) {
       return res.status(400).json({ message: "Los campos name, email y password son obligatorios" });
@@ -16,16 +16,14 @@ export const createUsers = async (req, res) => {
     }
     const nuevaPersona = await person.create({ name, lastname });
 
-    // 4. Ahora creamos el Usuario enlazándolo con el ID de la persona creada
-    // Usamos el campo 'person_id' de vinculación que definimos antes
     const newUser = await Usermodel.create({ 
-      name, 
+      nameUser, 
       email, 
       password,
-      person_id: nuevaPersona.id // Enganchamos el usuario con su persona correspondiente
+      person_id: nuevaPersona.id 
     });
 
-    // 5. Respondemos con éxito enviando los datos creados
+
     res.status(201).json({
       mensaje: "Usuario y registro de persona creados con éxito",
       usuario: newUser,
@@ -53,7 +51,7 @@ export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const usuario = await Usermodel.findByPk(id, {
-      attributes: ['id', 'name', 'email'],
+      attributes: ['id', 'nameUser', 'email'],
       include: { model: tasks, as: "tasks" }
     });
 
